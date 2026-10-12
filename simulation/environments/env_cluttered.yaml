@@ -1,0 +1,10 @@
+name: cluttered
+description: >
+  Many static obstacles, narrow gaps -- tests path optimality under
+  constrained geometry, and reorientation (lots of heading changes needed).
+width: 50
+height: 50
+obstacles: []   # TODO: populate with a dense obstacle layout
+dynamic_obstacles: []
+start: [2, 2]
+goal: [47, 47]

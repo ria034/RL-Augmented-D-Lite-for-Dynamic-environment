@@ -1,0 +1,10 @@
+name: narrow_corridor
+description: >
+  Long narrow corridor(s) -- tests reorientation and path stability (little
+  room for the path to shift without the robot needing to backtrack).
+width: 50
+height: 50
+obstacles: []   # TODO: populate with corridor walls
+dynamic_obstacles: []
+start: [2, 25]
+goal: [47, 25]

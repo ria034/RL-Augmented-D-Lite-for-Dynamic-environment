@@ -1,0 +1,16 @@
+# Example environment definition. One file per environment "type" used for
+# both RL training (a subset) and generalization evaluation (held-out ones).
+#
+# TODO: decide the actual schema once grid_map.py's representation is
+# finalized -- this is a placeholder shape, not a finished format.
+
+name: open_field
+description: >
+  Large open area, few obstacles -- baseline case, mostly tests path
+  optimality and time taken without much replanning pressure.
+width: 50
+height: 50
+obstacles: []       # list of static obstacle cells
+dynamic_obstacles: []  # obstacles that appear/move/clear during an episode
+start: [2, 2]
+goal: [47, 47]

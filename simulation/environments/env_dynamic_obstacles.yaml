@@ -1,0 +1,12 @@
+name: dynamic_obstacles
+description: >
+  Obstacles appear/move/clear during the episode -- this is the primary
+  test case for path stability (does the replanned path thrash?) and is
+  where D* Lite's incremental replanning advantage over full re-search
+  should matter most.
+width: 50
+height: 50
+obstacles: []
+dynamic_obstacles: []  # TODO: define obstacle appearance/movement schedule
+start: [2, 2]
+goal: [47, 47]
