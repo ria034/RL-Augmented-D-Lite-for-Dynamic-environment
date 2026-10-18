@@ -1,27 +1,47 @@
 """
-RL policy/agent.
+RL policy/agent wrapper using Stable-Baselines3.
 
-TODO:
-- Pick an algorithm. For this kind of low-dimensional, planning-adjacent
-  action space, PPO or SAC (if continuous action, e.g. cost-weighting) or
-  DQN (if discrete, e.g. replan/don't-replan) are reasonable starting
-  points -- an existing library (e.g. Stable-Baselines3) is a sensible
-  starting point rather than writing an RL algorithm from scratch, unless
-  there's a specific reason to.
-- Decide what the network sees (observation space, from env.py) and
-  outputs (action space, from env.py) before writing this.
+Wraps standard RL algorithms (like PPO) to fit into your planning stack, 
+keeping observation and action space handling clean and modular.
 """
-
+import os
+from stable_baselines3 import PPO
 
 class RLPlanningAgent:
-    def __init__(self, observation_space, action_space):
-        raise NotImplementedError
+    def __init__(self, observation_space, action_space, policy="MlpPolicy"):
+        """
+        observation_space: Gym observation space
+        action_space: Gym action space
+        policy: SB3 policy architecture string (default 'MlpPolicy')
+        """
+        self.observation_space = observation_space
+        self.action_space = action_space
+        
+        # Initialize Stable-Baselines3 PPO model with an MLP policy
+        self.model = PPO(
+            policy=policy,
+            env=None,  # Env can be bound later during training loops
+            verbose=0
+        )
 
     def act(self, observation):
-        raise NotImplementedError
+        """
+        Given an observation from the grid environment, predict the action.
+        Returns the action vector/scalar.
+        """
+        action, _states = self.model.predict(observation, deterministic=True)
+        return action
 
     def save(self, path):
-        raise NotImplementedError
+        """Saves the trained RL model checkpoint to disk."""
+        self.model.save(path)
 
     def load(self, path):
-        raise NotImplementedError
+        """Loads a pre-trained RL model checkpoint from disk."""
+        if not path.endswith(".zip"):
+            path += ".zip"
+            
+        if os.path.exists(path):
+            self.model = PPO.load(path)
+        else:
+            raise FileNotFoundError(f"Model file not found at {path}")
