@@ -1,4 +1,4 @@
-i am working on creating multiple scenarios and analyzingand evaluating how the method performs in each of them 
+i am working on creating multiple scenarios and analyzing and evaluating how the method performs in each of them 
 The changes to the environment includes 
 Location of Static Obstacles
 Location of Dynamic Obstacles 
